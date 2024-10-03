@@ -35,7 +35,7 @@ let camPosition;
 
 // Determine model path based on URL
 if (modelName === 'cell') {
-    modelPath = './CELULA_ANIMAL.gltf';
+    modelPath = './models/CELULA_ANIMAL.gltf';
     camPosition = new THREE.Vector3(0, 5, 0)
 } else if (modelName === 'car') {
     modelPath = './models/car.gltf';
