@@ -1,7 +1,6 @@
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.152.0/build/three.module.js';
-import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.152.0/examples/jsm/loaders/GLTFLoader.js';
-import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.152.0/examples/jsm/controls/OrbitControls.js';
-
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 let mixer;
 let clock = new THREE.Clock();
@@ -39,9 +38,9 @@ if (modelName === 'cell') {
     modelPath = './CELULA_ANIMAL.gltf';
     camPosition = new THREE.Vector3(0, 5, 0)
 } else if (modelName === 'car') {
-    modelPath = './car.gltf';
+    modelPath = './models/car.gltf';
 } else if (modelName === 'building') {
-    modelPath = './building.gltf';
+    modelPath = './models/building.gltf';
 } else {
     alert('Model not found!');
 }

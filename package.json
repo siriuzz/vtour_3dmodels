@@ -1,10 +1,10 @@
 {
   "name": "vtour_3dmodels",
   "version": "1.0.0",
-  "main": "index.js",
   "scripts": {
     "dev": "npx vite",
     "build": "vite build",
+    "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
