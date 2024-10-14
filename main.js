@@ -34,21 +34,25 @@ let modelPath = '';
 let camPosition;
 
 // Determine model path based on URL
-if (modelName === 'cell') {
-    modelPath = './models/CELULA_ANIMAL.gltf';
-    camPosition = new THREE.Vector3(0, 5, 0)
-} else if (modelName === 'car') {
-    modelPath = './models/car.gltf';
-} else if (modelName === 'building') {
-    modelPath = './models/building.gltf';
-} else {
-    alert('Model not found!');
+
+modelPath = `./models/${modelName}.gltf`;
+if (modelName == "crab") {
+
+    camPosition = new THREE.Vector3(0, 0, 0)
 }
+
 
 if (modelPath) {
     loader.load(modelPath, function (gltf) {
         const model = gltf.scene;
-        model.scale.set(1, 1, 1);
+
+        if (modelName == "carp") {
+            model.scale.set(30, 30, 30);
+
+        } else {
+            model.scale.set(1, 1, 1);
+
+        }
         scene.add(model);
 
         mixer = new THREE.AnimationMixer(model);
