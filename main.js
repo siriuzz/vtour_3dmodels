@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 let mixer;
@@ -30,14 +31,19 @@ const urlParams = new URLSearchParams(window.location.search);
 const modelName = urlParams.get('model');
 
 const loader = new GLTFLoader();
+const dracoLoader = new DRACOLoader();
+dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.7/');
+
+dracoLoader.preload();
 let modelPath = '';
 let camPosition;
 
 // Determine model path based on URL
-
-modelPath = `./models/${modelName}.gltf`;
-if (modelName == "crab") {
-
+loader.setDRACOLoader(dracoLoader);
+modelPath = `./models/${modelName}.glb`;
+if (modelName == "manglar_fruto") {
+    camPosition = new THREE.Vector3(0.2, 4, 0)
+} else {
     camPosition = new THREE.Vector3(0, 0, 0)
 }
 
@@ -46,13 +52,8 @@ if (modelPath) {
     loader.load(modelPath, function (gltf) {
         const model = gltf.scene;
 
-        if (modelName == "carp") {
-            model.scale.set(30, 30, 30);
-
-        } else {
-            model.scale.set(1, 1, 1);
-
-        }
+        if (modelName == "cangrejo") model.scale.set(30, 30, 30)
+        else if (modelName == "manglar_fruto") model.scale.set(3, 3, 3);
         scene.add(model);
 
         mixer = new THREE.AnimationMixer(model);
@@ -60,6 +61,11 @@ if (modelPath) {
         const modelPosition = new THREE.Vector3();
         model.getWorldPosition(modelPosition);
         controls.target.copy(camPosition);
+        if (gltf.animations[0]) {
+
+            const animationAction = mixer.clipAction(gltf.animations[0]);
+            animationAction.play();
+        }
 
     }, undefined, function (error) {
         console.error('An error occurred while loading the model:', error);
